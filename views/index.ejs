@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    
+</head>
+<body>
+    <div class="bg-black text-white w-full min-h-screen">
+        <div class="form p-10">
+            <form action="">
+                <input  class="w-full rounded-lg outline-none  px-5 py-2 bg-zinc-900" placeholder="Title goes here...">
+                <textarea class="w-full rounded-lg outline-none mt-2 resize-none block px-5 py-2 bg-zinc-900"  placeholder="Write your task details here..."></textarea>
+                <input type="submit" value="Create task" class="mt-2 bg-blue-600 px-5 py-2 ">
+            </form>
+        </div>
+        <div class="tasks p-10 flex gap-5 flex-wrap text-center justify-center items-center">
+            <% if(files.length>0){ %>
+                <% files.forEach(function(val){ %>
+                    <div class="task w-72 px-5 py-2 bg-zinc-900">
+                        <h2 class="text-3xl tracking-tighter">Some task goes here.</h2>
+                            <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem quos dolorum exercitationem fugiat.</p>
+                        </div>
+                    <% }) %>
+            <% } else{%>
+                <div class="text-2xl">No Tasks</div>
+            <% } %>
+            
+            
+            
+        </div>
+    </div>
+</body>
+</html>
