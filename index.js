@@ -10,8 +10,21 @@ app.use(express.static(path.join(__dirname,"public")));
 
 app.get("/",function(req,res){
     fs.readdir(`./files`,function(err,files){
-        res.render("index",{files:files});
+        if (err) {
+            return res.status(500).send("Error reading files directory.");
+        }
+
+        const tasks = files.map(file => {
+            const filePath = path.join(__dirname, "files", file);
+            const details = fs.readFileSync(filePath, "utf8");
+            const title = path.basename(file, ".txt");
+            return { title, details };
+        });
+
+        res.render("index", { tasks });
+        // res.render("index",{files:files});
     })
+     
     
 })
 
