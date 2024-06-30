@@ -24,9 +24,16 @@ app.get("/",function(req,res){
         res.render("index", { tasks });
         // res.render("index",{files:files});
     })
-     
-    
 })
+app.get("/edit/:filename",function(req,res){
+    res.render("edit",{ filename:req.params.filename })
+})
+app.post("/edit",function(req,res){
+    console.log(req.body)
+    fs.rename(`./files/${req.body.prev}.txt`,`./files/${req.body.new}.txt`,function(err){
+        res.redirect("/");
+    })
+});
 
 app.post("/create",function(req,res){
     fs.writeFile(`./files/${req.body.title.split(" ").join("")}.txt`,req.body.details,function(err){

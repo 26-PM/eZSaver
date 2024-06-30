@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+</head>
+
+<body>
+    <div class="bg-black text-white w-full min-h-screen flex justify-center text-center items-center">
+        
+        <form action="/edit" method="post">
+            <input required name="prev" class="  rounded-lg outline-none  px-5 py-2 bg-zinc-900" value="<%=filename%>">
+            <input required name="new" class="  rounded-lg outline-none mt-2 resize-none block px-5 py-2 bg-zinc-900"  placeholder="New Title"></input>
+            <input type="submit" value="Update title" class="mt-2 bg-zinc-700 px-5 py-2 cursor-pointer">
+        </form>
+
+
+
+
+    </div>
+</body>
+
+</html>
