@@ -4,24 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Edit Task</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
-
+    <style>
+        /* Optional: Add custom styles for transitions */
+        .transition-colors {
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        }
+    </style>
 </head>
 
-<body>
-    <div class="bg-black text-white w-full min-h-screen flex justify-center text-center items-center">
-        
-        <form action="/edit" method="post">
-            <input required name="prev" class="  rounded-lg outline-none  px-5 py-2 bg-zinc-900" value="<%=filename%>">
-            <input required name="new" class="  rounded-lg outline-none mt-2 resize-none block px-5 py-2 bg-zinc-900"  placeholder="New Title"></input>
-            <input type="submit" value="Update title" class="mt-2 bg-zinc-700 px-5 py-2 cursor-pointer">
+<body class="bg-gray-800 text-white min-h-screen flex items-center justify-center">
+    <div class="container mx-4 sm:mx-6 md:mx-8 lg:mx-12 xl:mx-24">
+        <h1 class="text-3xl font-semibold mb-6 text-center">Edit Task</h1>
+        <form action="/edit" method="post" class="bg-gray-900 p-6 rounded-lg shadow-lg max-w-md mx-auto">
+            <div class="mb-4">
+                <label for="prev" class="block text-sm font-medium text-gray-300">Current Title</label>
+                <input id="prev" name="prev" type="text" required class="w-full mt-1 rounded-lg border border-gray-700 bg-gray-800 text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors" value="<%= filename %>">
+            </div>
+            <div class="mb-6">
+                <label for="new" class="block text-sm font-medium text-gray-300">New Title</label>
+                <input id="new" name="new" type="text" required placeholder="New Title" class="w-full mt-1 rounded-lg border border-gray-700 bg-gray-800 text-white px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+            </div>
+            <div class="flex gap-4">
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
+                    Update Title
+                </button>
+                <button type="button" onclick="window.location.href='/'" class="w-full bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 transition-colors">
+                    Cancel
+                </button>
+            </div>
         </form>
-
-
-
-
     </div>
 </body>
 
