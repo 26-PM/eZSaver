@@ -3,36 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>eZ Saver</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
-    
+    <style>
+        .task-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
-<body>
-    <div class="bg-black text-white w-full min-h-screen">
-        <div class="form p-10">
-            <form action="/create" method="post">
-                <input required name="title" class="w-full rounded-lg outline-none  px-5 py-2 bg-zinc-900" placeholder="Title goes here...">
-                <textarea required name="details" class="w-full rounded-lg outline-none mt-2 resize-none block px-5 py-2 bg-zinc-900"  placeholder="Write your task details here..."></textarea>
-                <input type="submit" value="Create task" class="mt-2 bg-blue-600 px-5 py-2 cursor-pointer">
-            </form>
-        </div>
-        <div class="tasks p-10 flex gap-5 flex-wrap text-center justify-center items-center">
-            <% if(tasks.length>0){ %>
-                <% tasks.forEach(function(val){ %>
-                    <div class="task w-72 px-5 py-2 bg-zinc-900">
-                        <h2 class="text-5xl bg-zinc-800"><%= val.title%></h2>
-                            <p class="mt-3 text-xl"><%= val.details%></p>
-                            <button class="mt-2 bg-zinc-800 tracking-tighter px-4 py-2 cursor-pointer"><a href="/edit/<%=val.title%>">Edit</a></button>
+<body class="bg-gray-800 text-white min-h-screen flex flex-col">
+    <header class="bg-gray-900 p-4 shadow-md">
+        <h1 class="text-3xl font-bold text-center">eZ Saver</h1>
+    </header>
+    <main class="flex-grow">
+        <div class="container mx-auto p-8">
+            <div class="mb-8">
+                <h2 class="text-2xl font-semibold mb-4">Create New Task</h2>
+                <form action="/create" method="post" class="space-y-4">
+                    <input required name="title" class="w-full rounded-lg border border-gray-700 px-5 py-3 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Title goes here...">
+                    <textarea required name="details" class="w-full rounded-lg border border-gray-700 px-5 py-3 bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your task details here..."></textarea>
+                    <input type="submit" value="Create Task" class="w-full bg-blue-600 px-5 py-3 rounded-lg cursor-pointer text-center hover:bg-blue-700 transition-colors">
+                </form>
+            </div>
+            <div class="tasks grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <% if(tasks.length > 0) { %>
+                    <% tasks.forEach(function(val) { %>
+                        <div class="task-card bg-gray-900 p-6 rounded-lg shadow-md">
+                            <h3 class="text-2xl font-semibold mb-2 bg-gray-800 p-2 rounded-lg"><%= val.title %></h3>
+                            <p class="text-lg mb-4"><%= val.details %></p>
+                            <div class="flex gap-4">
+                                <a href="/edit/<%= val.title %>" class="bg-blue-600 px-4 py-2 rounded-lg text-white text-center cursor-pointer hover:bg-blue-700 transition-colors">Edit</a>
+                                <form action="/delete" method="post" class="inline">
+                                    <input type="hidden" name="filename" value="<%= val.title %>">
+                                    <button type="submit" class="bg-red-600 px-4 py-2 rounded-lg text-white cursor-pointer hover:bg-red-700 transition-colors">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     <% }) %>
-            <% } else{%>
-                <div class="text-2xl">No Tasks</div>
-            <% } %>
-            
-            
-            
+                <% } else { %>
+                    <div class="text-2xl text-center">No Tasks</div>
+                <% } %>
+            </div>
         </div>
-    </div>
+    </main>
+    <footer class="bg-gray-900 p-4 text-center text-gray-400">
+        <p>&copy; 2024 eZ Saver. All rights reserved.</p>
+    </footer>
 </body>
 </html>
